@@ -49,6 +49,13 @@ const annotate = async(image)=>{
     });
     if(!modest)
         return undefined;
+    switch(safeSearchAnnotation){
+        case 'POSSIBLE':
+        case 'LIKELY':
+        case 'VERY_LIKELY':
+            modest = false;
+            break;
+    }
     safeSearchAnnotation.man = 'VERY_UNLIKELY';safeSearchAnnotation.woman = 'VERY_UNLIKELY';
     const obj = new SafeSearch(safeSearchAnnotation);
     obj.save();
