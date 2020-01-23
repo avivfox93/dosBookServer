@@ -46,8 +46,6 @@ const annotate = async(image)=>{
                 }
                 break;
         }
-        if(!modest)
-            break;
     });
     safeSearchAnnotation.man = 'VERY_UNLIKELY';safeSearchAnnotation.woman = 'VERY_UNLIKELY';
     safeSearchAnnotation.modest = modest;
