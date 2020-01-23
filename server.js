@@ -28,7 +28,7 @@ app.post('/api/upload',async(req,res)=>{
     let r = '';
     do{
         r = crypto.randomBytes(10).toString('hex');
-    }while(require("fs").exists('./photos/' + r + '.jpg'));
+    }while(await require("fs").exists('./photos/' + r + '.jpg'));
     
     require("fs").writeFile('photos/' + r + '.jpg', base64Data, 'base64', function(err) {
         if(!err){

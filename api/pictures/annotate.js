@@ -49,7 +49,7 @@ const annotate = async(image)=>{
     });
     if(!modest)
         return undefined;
-    switch(safeSearchAnnotation){
+    switch(safeSearchAnnotation.adult){
         case 'POSSIBLE':
         case 'LIKELY':
         case 'VERY_LIKELY':
