@@ -34,10 +34,6 @@ const SafeSearchSchema = new Schema({
         type: String,
         enum: posibility,
         required: true
-    },
-    modest:{
-        type: Boolean,
-        required: true,
     }
   });
 

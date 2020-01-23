@@ -20,8 +20,16 @@ app.post('/api/auth/login',login);
 app.post('/api/upload',async(req,res)=>{
     const image = req.body.data;
     const safe = await annotate(image);
+    if(!safe){
+        res.status(401).send({error:'Picture is not modest!'});
+        return;
+    }
     var base64Data = image.replace(/^data:image\/jpeg;base64,/, "");
-    let r = crypto.randomBytes(10).toString('hex');
+    let r = '';
+    do{
+        r = crypto.randomBytes(10).toString('hex');
+    }while(require("fs").exists('./photos/' + r + '.jpg'));
+    
     require("fs").writeFile('photos/' + r + '.jpg', base64Data, 'base64', function(err) {
         if(!err){
             res.send({url:r + '.jpg',safeSearch:safe});
