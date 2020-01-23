@@ -10,7 +10,7 @@ const annotate = async(image)=>{
             image : {content: image},
             features:[
                 {type: 'SAFE_SEARCH_DETECTION'},
-                {maxResults: 5,type: "LABEL_DETECTION"}
+                {maxResults: 5,type: 'LABEL_DETECTION'}
             ]
         }
     };
@@ -21,7 +21,7 @@ const annotate = async(image)=>{
         console.log(err);
         return resp;
     }
-    console.log('responses: ' + (resp.data.responses[1]));
+    console.log('responses: ' + JSON.stringify(resp.data));
     let params = resp.data.responses[0].safeSearchAnnotation
     
     params.man = 'VERY_UNLIKELY';params.woman = 'VERY_UNLIKELY';
