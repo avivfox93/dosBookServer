@@ -13,7 +13,7 @@ const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('connected to database'));
 
-app.use(bodyParser.json({ limit: "50mb" }))
+app.use(express.json({limit:'50mb'}));
 
 app.post('/api/auth/login',login);
 
