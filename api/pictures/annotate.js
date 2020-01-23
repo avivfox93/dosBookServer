@@ -21,7 +21,7 @@ const annotate = async(image)=>{
         console.log(err);
         return resp;
     }
-    console.log('responses: ' + resp.data.responses);
+    console.log('responses: ' + (resp.data.responses[1]));
     let params = resp.data.responses[0].safeSearchAnnotation
     
     params.man = 'VERY_UNLIKELY';params.woman = 'VERY_UNLIKELY';
