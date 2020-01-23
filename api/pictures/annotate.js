@@ -8,12 +8,9 @@ const annotate = async(image)=>{
     const postData = {
         requests:{
             image : {content: image},
-            features:[{
-                type:'FACE_DETECTION',
-                maxResults:10
-                },
+            features:[
                 {type: 'SAFE_SEARCH_DETECTION'},
-                {type: 'FACE_DETECTION'}
+                {maxResults: 5,type: "LABEL_DETECTION"}
             ]
         }
     };
@@ -24,6 +21,7 @@ const annotate = async(image)=>{
         console.log(err);
         return resp;
     }
+    console.log('responses: ' + resp.data.responses);
     let params = resp.data.responses[0].safeSearchAnnotation
     
     params.man = 'VERY_UNLIKELY';params.woman = 'VERY_UNLIKELY';

@@ -18,14 +18,13 @@ app.use(express.json());
 app.post('/api/auth/login',login);
 
 app.post('/api/upload',async(req,res)=>{
-    // console.log('WALLAK ' + req.url + JSON.stringify(req.body));
     const image = req.body.data;
     const safe = await annotate(image);
     var base64Data = image.replace(/^data:image\/jpeg;base64,/, "");
     let r = crypto.randomBytes(10).toString('hex');
     require("fs").writeFile('photos/' + r + '.jpg', base64Data, 'base64', function(err) {
         if(!err){
-            res.send({name:r + '.jpg',safe_search:safe});
+            res.send({url:r + '.jpg',safeSearch:safe});
             return;
         }
         console.log(err);
