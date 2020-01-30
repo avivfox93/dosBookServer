@@ -8,6 +8,7 @@ const app = express();
 const mongoose = require('mongoose');
 const annotate = require('./api/pictures/annotate').default;
 const https = require('https');
+const fs = require('fs');
 
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/cert.pem', 'utf8');
