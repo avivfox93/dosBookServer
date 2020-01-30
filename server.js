@@ -7,6 +7,17 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const annotate = require('./api/pictures/annotate').default;
+const https = require('https');
+
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/chain.pem', 'utf8');
+
+const credentials = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
+};
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true });
 const db = mongoose.connection;
@@ -45,4 +56,6 @@ app.get('/api/photo',(req,res)=>{
     res.sendFile(__dirname  + '/photos/' + fileName);
 });
 
-app.listen(process.env.PORT, () => console.log('server started'));
+const httpsServer = https.createServer(credentials,app);
+httpsServer.listen(process.env.PORT,()=>{console.log('HTTPS Server running on port 443');});
+// app.listen(process.env.PORT, () => console.log('server started'));
