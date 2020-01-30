@@ -57,6 +57,11 @@ app.get('/api/photo',(req,res)=>{
     res.sendFile(__dirname  + '/photos/' + fileName);
 });
 
+app.get('/api/ota/:file(*)',(req,res)=>{
+    const fileName = req.params.file;
+    res.sendFile(__dirname  + '/ota/' + fileName);
+});
+
 const httpsServer = https.createServer(credentials,app);
 httpsServer.listen(process.env.PORT,()=>{console.log('HTTPS Server running on port 443');});
 // app.listen(process.env.PORT, () => console.log('server started'));
