@@ -17,7 +17,7 @@ const annotate = async(image)=>{
     try{
         resp = await post('https://vision.googleapis.com/v1/images:annotate?key=' + process.env.GOOGLE_API_KEY,postData);
     }catch(err){
-        console.log(err);
+        console.error(err);
         return resp;
     }
     console.log('responses: ' + JSON.stringify(resp.data));
