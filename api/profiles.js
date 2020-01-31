@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const register = (req,res)=>{
     try {
+        console.log(JSON.stringify(req.body.profile));
         let user = new User(req.body.profile);
         user.save();
         res.send({token : jwt.sign(user,process.env.JWT_KEY)});
