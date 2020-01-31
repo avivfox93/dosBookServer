@@ -1,6 +1,6 @@
 
 
-import { Schema, model } from 'mongoose';
+import mongoose,{ Schema, model } from 'mongoose';
 
 const PictureSchema = new Schema({
     url:{
