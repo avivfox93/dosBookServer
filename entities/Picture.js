@@ -11,6 +11,9 @@ const PictureSchema = new Schema({
         type: mongoose.Types.ObjectId,
         required: true,
         ref: 'SafeSearch'
+    },
+    modest:{
+        type: Boolean
     }
   });
 
