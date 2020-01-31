@@ -30,11 +30,11 @@ db.once('open', () => console.log('connected to database'));
 
 app.use(express.json({limit:'50mb'}));
 
-app.post('/api/auth/login',login);
+app.post('/api/auth/login',auth,login);
 
-app.post(auth,'/api/profiles',profiles.register);
+app.post('/api/profiles',auth,profiles.register);
 
-app.get(auth,'/api/profiles',profiles.get);
+app.get('/api/profiles',auth,profiles.get);
 
 app.post('/api/upload',async(req,res)=>{
     const image = req.body.data;
