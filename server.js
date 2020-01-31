@@ -52,8 +52,8 @@ app.post('/api/upload',async(req,res)=>{
     });
 });
 
-app.get('/api/photo',(req,res)=>{
-    const fileName = req.query.name;
+app.get('/api/photo/:file(*)',(req,res)=>{
+    const fileName = req.params.file;
     res.sendFile(__dirname  + '/photos/' + fileName);
 });
 
