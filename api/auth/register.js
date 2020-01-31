@@ -4,13 +4,15 @@ import User, { findOne } from '../../entities/User';
 
 
 const login = async (req,res)=>{
-    const token = req.body.token;
+    const phone = req.body.phone;
 
     try{
-        const user = await findOne({token: token});
+        const user = await findOne({phone: phone});
         if(user)
             throw 'User Exist!';
-        const newUser = new User(req.body.user);
+        let user = req.body.user;
+        user.token = req.token;
+        const newUser = new User(user);
         try{
             newUser.save();
         }catch(err){

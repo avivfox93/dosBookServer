@@ -1,19 +1,15 @@
 
-const jwt = require('jsonwebtoken')
-const User = require('../../entities/User')
+var admin = require('firebase-admin');
 
 const auth = async(req,res,next)=>{
-    const token = req.header('Authorization').replace('Bearer ', '');
-    const data = jwt.verify(token, process.env.JWT_KEY)
-    try {
-        const user = await User.findOne({ _id: data._id })
-        if (!user) {
-            throw new Error()
-        }
-        req.user = user
-        next()
-    } catch (error) {
-        res.status(401).send({ error: 'Not authorized to access this resource' })
+    try{
+        const decodedToken = await admin.auth().verifyIdToken(req.body.token);
+        if(!decodedToken)
+            throw 'Auth Failed!';
+        req.uid = decodedToken.uid;
+        return next();
+    }catch(err){
+        req.status(401).send({error:err});
     }
 }
 

@@ -4,11 +4,11 @@ const User = require('../../entities/User');
 
 
 const login = async (req,res)=>{
-    const token = req.body.token;
+    const phone = req.body.phone;
 
     try{
-        console.log('looking for: ' + req.body.token);
-        const user = await User.findOne({token: token});
+        console.log('looking for: ' + phone);
+        const user = await User.findOne({phone: phone});
         if(!user)
             throw 'new user';
         console.log(JSON.stringify(user) + '\nAuthenticated!')

@@ -7,6 +7,7 @@ const register = (req,res)=>{
         req.body.profile._id = undefined;
         console.log(JSON.stringify(req.body.profile));
         let user = new User(req.body.profile);
+        user.uid = req.uid;
         user.save();
         res.status(200).send({token: user.token});
     } catch (error) {

@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 var crypto = require("crypto");
-
+var admin = require('firebase-admin');
 const login = require('./api/auth/login')
 const express = require('express');
 const app = express();
@@ -10,7 +10,7 @@ const annotate = require('./api/pictures/annotate').default;
 const https = require('https');
 const fs = require('fs');
 const profiles = require('./api/profiles');
-
+const auth = require('./api/auth/authenticate');
 const Picture = require('./entities/Picture');
 
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/privkey.pem', 'utf8');
@@ -30,11 +30,11 @@ db.once('open', () => console.log('connected to database'));
 
 app.use(express.json({limit:'50mb'}));
 
-app.post('/api/auth/login',login);
+app.post(auth,'/api/auth/login',login);
 
-app.post('/api/profiles',profiles.register);
+app.post(auth,'/api/profiles',profiles.register);
 
-app.get('/api/profiles',profiles.get);
+app.get(auth,'/api/profiles',profiles.get);
 
 app.post('/api/upload',async(req,res)=>{
     const image = req.body.data;
@@ -71,6 +71,11 @@ app.get('/api/photo/:file(*)',(req,res)=>{
 app.get('/api/ota/:file(*)',(req,res)=>{
     const fileName = req.params.file;
     res.sendFile(__dirname  + '/ota/' + fileName);
+});
+
+admin.initializeApp({
+    credential: admin.credential.cer('token.json'),
+    databaseURL: "https://dosbook-45989.firebaseio.com"
 });
 
 const httpsServer = https.createServer(credentials,app);
