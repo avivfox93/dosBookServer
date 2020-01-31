@@ -1,6 +1,6 @@
 
 // import '@tensorflow/tfjs-node';
-const post = require('axios');
+const post = require('axios').default.post;
 const SafeSearch = require('../../entities/SafeSearch');
 
 const annotate = async(image)=>{
