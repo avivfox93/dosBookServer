@@ -1,6 +1,6 @@
 
 
-import { Schema, Types, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const PictureSchema = new Schema({
     url:{
@@ -8,7 +8,7 @@ const PictureSchema = new Schema({
         required: true
     },
     safeSearch:{
-        type: Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         required: true,
         ref: 'SafeSearch'
     }
