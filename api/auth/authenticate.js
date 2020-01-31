@@ -9,7 +9,7 @@ const auth = async(req,res,next)=>{
         req.uid = decodedToken.uid;
         return next();
     }catch(err){
-        req.status(401).send({error:err});
+        res.status(401).send({error:err});
     }
 }
 
