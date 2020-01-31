@@ -23,4 +23,4 @@ const get = async(req,res)=>{
 
 }
 
-module.exports = {register : register};
+module.exports = {register : register, get : get};

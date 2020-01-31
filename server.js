@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const annotate = require('./api/pictures/annotate').default;
 const https = require('https');
 const fs = require('fs');
+const profiles = require('./api/profiles');
 
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/cert.pem', 'utf8');
@@ -28,6 +29,10 @@ db.once('open', () => console.log('connected to database'));
 app.use(express.json({limit:'50mb'}));
 
 app.post('/api/auth/login',login);
+
+app.post('/api/profiles',profiles.register);
+
+app.get('/api/profiles',profiles.get);
 
 app.post('/api/upload',async(req,res)=>{
     const image = req.body.data;
