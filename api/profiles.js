@@ -8,6 +8,7 @@ const register = (req,res)=>{
         user.save();
         res.send({token : jwt.sign(user,process.env.JWT_KEY)});
     } catch (error) {
+        console.error('ERROR!: ' + error);
         res.status(401).send({ error: 'Not authorized to access this resource' });
     }
 }
