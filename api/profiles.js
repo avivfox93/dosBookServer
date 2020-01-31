@@ -20,7 +20,7 @@ const get = async(req,res)=>{
                 path: 'safeSearch'
             }
         }).exec();
-
+    res.send({profiles: profiles});
 }
 
 module.exports = {register : register, get : get};
