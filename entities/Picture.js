@@ -14,4 +14,4 @@ const PictureSchema = new Schema({
     }
   });
 
-  export default model('Picture', PictureSchema);
+  module.exports = model('Picture', PictureSchema);

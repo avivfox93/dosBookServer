@@ -47,6 +47,4 @@ UserSchema.methods.generateAuthToken = async function() {
     return token;
 }
 
-
-
-export default model('User', UserSchema);
+module.exports = model('User', UserSchema);
