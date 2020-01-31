@@ -30,7 +30,7 @@ db.once('open', () => console.log('connected to database'));
 
 app.use(express.json({limit:'50mb'}));
 
-app.post(auth,'/api/auth/login',login);
+app.post('/api/auth/login',login);
 
 app.post(auth,'/api/profiles',profiles.register);
 
