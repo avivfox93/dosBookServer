@@ -11,6 +11,8 @@ const https = require('https');
 const fs = require('fs');
 const profiles = require('./api/profiles');
 
+const Picture = require('./entities/Picture');
+
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/cert.pem', 'utf8');
 const ca = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/chain.pem', 'utf8');
@@ -49,7 +51,10 @@ app.post('/api/upload',async(req,res)=>{
     
     require("fs").writeFile('photos/' + r + '.jpg', base64Data, 'base64', function(err) {
         if(!err){
-            res.send({url:r + '.jpg',safeSearch:safe});
+            const result = {url:r + '.jpg',safeSearch:safe};
+            const picture = new Picture(result);
+            picture.save();
+            res.send(result);
             return;
         }
         console.log(err);
