@@ -3,7 +3,8 @@ var admin = require('firebase-admin');
 
 const auth = async(req,res,next)=>{
     try{
-        const decodedToken = await admin.auth().verifyIdToken(req.body.token);
+        let token = req.body.token
+        const decodedToken = await admin.auth().verifyIdToken(token);
         if(!decodedToken)
             throw 'Auth Failed!';
         req.uid = decodedToken.uid;
