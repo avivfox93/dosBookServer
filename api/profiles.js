@@ -8,7 +8,7 @@ const register = (req,res)=>{
         console.log(JSON.stringify(req.body.profile));
         let user = new User(req.body.profile);
         user.save();
-        // res.send({token : jwt.sign(user,process.env.JWT_KEY)});
+        res.status(200).send({token: user.token});
     } catch (error) {
         console.error('ERROR!: ' + error);
         res.status(401).send({ error: 'Not authorized to access this resource' });
