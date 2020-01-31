@@ -1,10 +1,10 @@
 
 
-import { Schema as _Schema, Types, model } from 'mongoose';
+const mongoose = require('mongoose');
 
-const PostSchema = new _Schema({
+const PostSchema = new mongoose.Schema({
     userProfile:{
-        type: Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
     },
@@ -18,17 +18,17 @@ const PostSchema = new _Schema({
         default:Date.now
     },
     pictures:[{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         default: [],
         ref: 'Picture',
         required: true
     }],
     comments:[{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         default: [],
         ref: 'Comment',
         required: true
     }]
   });
 
-  module.exports = model('Post', PostSchema);
+  module.exports = mongoose.model('Post', PostSchema);

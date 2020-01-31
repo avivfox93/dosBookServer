@@ -1,7 +1,7 @@
 
-import mongoose,{ Schema, model } from 'mongoose';
+const mongoose = require('mongoose');
 
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
     token:{
         type: String,
         required: true
@@ -47,4 +47,4 @@ UserSchema.methods.generateAuthToken = async function() {
     return token;
 }
 
-module.exports = model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

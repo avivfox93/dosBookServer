@@ -1,10 +1,10 @@
 
 
-import mongoos, { Schema, model } from 'mongoose';
+const mongoose = require('mongoose');
 
 const posibility = ['VERY_UNLIKELY','UNLIKELY','POSSIBLE','LIKELY','VERY_LIKELY'];
 
-const SafeSearchSchema = new Schema({
+const SafeSearchSchema = new mongoose.Schema({
     spoof:{
         type: String,
         enum: posibility,
@@ -37,4 +37,4 @@ const SafeSearchSchema = new Schema({
     }
   });
 
-  module.exports =  model('SafeSearch', SafeSearchSchema);
+  module.exports =  mongoose.model('SafeSearch', SafeSearchSchema);

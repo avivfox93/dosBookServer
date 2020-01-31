@@ -1,10 +1,10 @@
 
 
-import { Schema, Types, model } from 'mongoose';
+const mongoose = require('mongoose');
 
-const CommentSchema = new Schema({
+const CommentSchema = new mongoose.Schema({
     userProfile:{
-        type: Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
     },
@@ -19,4 +19,4 @@ const CommentSchema = new Schema({
     }
   });
 
-  module.exports = model('Comment', CommentSchema);
+  module.exports = mongoose.model('Comment', CommentSchema);

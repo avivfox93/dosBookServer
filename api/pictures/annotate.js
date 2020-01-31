@@ -1,7 +1,6 @@
 
 // import '@tensorflow/tfjs-node';
-import * as faceapi from 'face-api.js';
-import { post } from 'axios';
+const post = require('axios');
 const SafeSearch = require('../../entities/SafeSearch');
 
 const annotate = async(image)=>{
@@ -62,4 +61,4 @@ const annotate = async(image)=>{
     return obj;
 }
 
-export default annotate;
+module.exports = annotate;

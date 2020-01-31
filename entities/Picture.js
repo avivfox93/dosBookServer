@@ -1,8 +1,8 @@
 
 
-import mongoose,{ Schema, model } from 'mongoose';
+const mongoose = require('mongoose');
 
-const PictureSchema = new Schema({
+const PictureSchema = new mongoose.Schema({
     url:{
         type: String,
         required: true
@@ -17,4 +17,4 @@ const PictureSchema = new Schema({
     }
   });
 
-  module.exports = model('Picture', PictureSchema);
+  module.exports = mongoose.model('Picture', PictureSchema);
