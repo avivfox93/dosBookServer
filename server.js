@@ -54,6 +54,7 @@ app.post('/api/upload',async(req,res)=>{
             const result = {url:r + '.jpg',safeSearch:safe};
             const picture = new Picture(result);
             picture.save();
+            result._id = picture._id;
             res.send(result);
             return;
         }
