@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken')
 const register = (req,res)=>{
     try {
         console.log(JSON.stringify(req.body.profile));
-        if(req.body.profile[_id])
-            delete req.body.profile[_id];
+        // if(req.body.profile[_id])
+        req.body.profile._id = undefined;
         console.log(JSON.stringify(req.body.profile));
         let user = new User(req.body.profile);
         user.save();
