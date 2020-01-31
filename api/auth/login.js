@@ -10,6 +10,7 @@ const login = async (req,res)=>{
         const user = await findOne({token: token});
         if(!user)
             throw 'new user';
+        console.log(JSON.stringify(user) + '\nAuthenticated!')
         res.send({user:JSON.stringify(user)});
     }catch(err){
         res.send({new_user:true});
