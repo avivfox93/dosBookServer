@@ -74,7 +74,7 @@ app.get('/api/ota/:file(*)',(req,res)=>{
 });
 
 admin.initializeApp({
-    credential: admin.credential.cer('token.json'),
+    credential: admin.credential.cert('token.json'),
     databaseURL: "https://dosbook-45989.firebaseio.com"
 });
 
