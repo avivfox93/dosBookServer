@@ -1,6 +1,5 @@
 
 const User = require('../entities/User');
-const jwt = require('jsonwebtoken')
 
 const register = (req,res)=>{
     try {
