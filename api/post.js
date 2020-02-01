@@ -1,7 +1,7 @@
 
 const Post = require('../entities/Post');
 
-const createPost = (req,res)=>{
+const createPost = async(req,res)=>{
     try{
         const post = new Post(req.body.post);
         await post.save();
@@ -11,7 +11,7 @@ const createPost = (req,res)=>{
     }
 }
 
-const getPosts = (req,res)=>{
+const getPosts = async(req,res)=>{
     try{
         const user = req.user;
         const posts = await Post.find().limit(50).where('userProfile').in(user.friendsId)
