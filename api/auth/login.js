@@ -8,7 +8,7 @@ const login = async (req,res)=>{
 
     try{
         console.log('looking for: ' + uid);
-        const user = await User.findOne({uid: uid});
+        const user = await User.findOne({uid: uid}).populate('Picture');
         if(!user)
             throw 'new user';
         console.log(JSON.stringify(user) + '\nAuthenticated!')
