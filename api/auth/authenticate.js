@@ -16,7 +16,7 @@ const auth = async(req,res,next)=>{
         req.uid = decodedToken.uid;
         return next();
     }catch(err){
-        console.error(err + '\n' + 'cannot auth: ' + token);
+        console.error(err + '\n' + 'cannot auth: ' + JSON.stringify(req.body));
         res.status(401).send({error:err});
     }
 }
