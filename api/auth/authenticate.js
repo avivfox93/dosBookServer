@@ -9,10 +9,8 @@ const auth = async(req,res,next)=>{
         if(!decodedToken)
             throw 'Auth Failed!';
         try{
-            res.locals.user = await User.find({uid:decodedToken});
-            console.log('wallak user: ' + JSON.stringify(req.locals.user));
+            res.locals.user = await User.find({uid:decodedToken.uid});
         }catch(error){
-            console.error('errorrrr ' + error)
         }
         res.locals.uid = decodedToken.uid;
         return next();
