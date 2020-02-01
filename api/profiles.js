@@ -4,7 +4,7 @@ const User = require('../entities/User');
 const register = (req,res)=>{
     try {
         req.body.profile._id = undefined;
-        console.log(JSON.stringify(req.body.profile));
+        console.log('Register ' + req.body.profile.uid);
         let user = new User(req.body.profile);
         user.save();
         res.status(200).send({token: user.token});
