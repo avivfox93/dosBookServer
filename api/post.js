@@ -20,7 +20,7 @@ const getPosts = async(req,res)=>{
                         populate:
                             {path:'safeSearch profilePic userProfile', populate: {path: 'safeSearch profilePic'}}
                         });
-        req.send({posts})
+        res.send({posts})
     }catch(error){
         console.error(error);
         res.status(401).send({error:error});
