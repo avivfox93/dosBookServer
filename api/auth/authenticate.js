@@ -14,6 +14,7 @@ const auth = async(req,res,next)=>{
             console.error(error);
         }
         res.locals.uid = decodedToken.uid;
+        console.log('UID: ' + res.locals.uid);
         return next();
     }catch(err){
         console.error(err + '\n' + 'cannot auth: ' + JSON.stringify(req.body));
