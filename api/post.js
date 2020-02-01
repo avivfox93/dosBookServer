@@ -13,7 +13,7 @@ const createPost = async(req,res)=>{
 
 const getPosts = async(req,res)=>{
     try{
-        const user = req.user;
+        const user = res.locals.user;
         const posts = await Post.find().limit(50).where('userProfile').in(user.friendsId)
             .where('date').lte(req.body.date).limit(50)
             .populate({path:'userProfile pictures comments',
