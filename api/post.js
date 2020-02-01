@@ -13,7 +13,9 @@ const createPost = (req,res)=>{
 
 const getPosts = (req,res)=>{
     try{
-        const posts = await Post.find().limit(50).where('_id').in(req.body.posts)
+        const user = req.user;
+        const posts = await Post.find().limit(50).where('userProfile').in(user.friendsId)
+            .where('date').lte(req.body.date).limit(50)
             .populate({path:'userProfile pictures comments',
                         populate:
                             {path:'safeSearch profilePic userProfile', populate: {path: 'safeSearch profilePic'}}
@@ -24,4 +26,4 @@ const getPosts = (req,res)=>{
     }
 }
 
-module.exports = {createPost: createPost};
+module.exports = {createPost: createPost, getPosts: getPosts};

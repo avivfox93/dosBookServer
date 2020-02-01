@@ -2,11 +2,12 @@
 require('dotenv').config();
 var crypto = require("crypto");
 var admin = require('firebase-admin');
-const login = require('./api/auth/login')
+const login = require('./api/auth/login');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const annotate = require('./api/pictures/annotate');
+const post = require('./api/post');
 const https = require('https');
 const fs = require('fs');
 const profiles = require('./api/profiles');
@@ -62,6 +63,8 @@ app.post('/api/upload',async(req,res)=>{
         res.status(500).send({error:err});
     });
 });
+
+app.get('/api/posts',auth,post.getPosts);
 
 app.get('/api/photo/:file(*)',(req,res)=>{
     const fileName = req.params.file;
