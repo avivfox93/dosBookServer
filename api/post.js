@@ -22,7 +22,8 @@ const getPosts = async(req,res)=>{
                         });
         req.send({posts})
     }catch(error){
-        res.status(401).sennd({error:error});
+        console.error(error);
+        res.status(401).send({error:error});
     }
 }
 
