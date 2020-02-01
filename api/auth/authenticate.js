@@ -11,6 +11,7 @@ const auth = async(req,res,next)=>{
         try{
             req.locals.user = await User.find({uid:decodedToken.uid});
         }catch(error){
+            console.error(error);
         }
         res.locals.uid = decodedToken.uid;
         return next();
