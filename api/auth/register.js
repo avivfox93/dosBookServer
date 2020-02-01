@@ -11,7 +11,7 @@ const login = async (req,res)=>{
         if(user)
             throw 'User Exist!';
         let user = req.body.user;
-        user.token = req.token;
+        user.token = req.body.token;
         const newUser = new User(user);
         try{
             newUser.save();

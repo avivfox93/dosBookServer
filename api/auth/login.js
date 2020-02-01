@@ -4,7 +4,7 @@ const User = require('../../entities/User');
 
 
 const login = async (req,res)=>{
-    const uid = req.uid;
+    const uid = res.locals.uid;
 
     try{
         console.log('looking for: ' + uid);
