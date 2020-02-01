@@ -12,6 +12,7 @@ const login = async (req,res)=>{
             throw 'User Exist!';
         let user = req.body.user;
         user.token = req.body.token;
+        user.uid = res.locals.uid;
         const newUser = new User(user);
         try{
             newUser.save();
