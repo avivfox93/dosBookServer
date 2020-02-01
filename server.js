@@ -64,7 +64,7 @@ app.post('/api/upload',async(req,res)=>{
     });
 });
 
-app.get('/api/posts',auth,post.getPosts);
+app.post('/api/get_posts',auth,post.getPosts);
 
 app.get('/api/photo/:file(*)',(req,res)=>{
     const fileName = req.params.file;
