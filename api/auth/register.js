@@ -10,8 +10,9 @@ const login = async (req,res)=>{
         const user = await findOne({phone: phone});
         if(user)
             throw 'User Exist!';
-        let user = req.body.user;
-        user.token = req.body.token;
+        let temp = req.body.user;
+        temp.token = req.body.token;
+        temp.uid = res.locals.uid;
         const newUser = new User(user);
         try{
             newUser.save();
