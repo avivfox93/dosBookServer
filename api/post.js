@@ -1,5 +1,6 @@
 
 const Post = require('../entities/Post');
+const Comment = require('../entities/Comment');
 
 const createPost = async(req,res)=>{
     try{
