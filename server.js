@@ -66,6 +66,8 @@ app.post('/api/upload',async(req,res)=>{
 
 app.post('/api/get_posts',auth,post.getPosts);
 
+app.post('/api/post',auth,post.createPost);
+
 app.get('/api/photo/:file(*)',(req,res)=>{
     const fileName = req.params.file;
     res.sendFile(__dirname  + '/photos/' + fileName);
