@@ -4,7 +4,7 @@ const Comment = require('../entities/Comment');
 
 const createPost = async(req,res)=>{
     try{
-        let p = req.body.post;
+        let p = JSON.parse(req.body.post);
         p.userProfile = undefined;
         p.userProfile = res.locals.user._id;
         console.log('wallak ' + p.userProfile);
