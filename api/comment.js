@@ -9,7 +9,7 @@ const postComment = async(req,res)=>{
         let c = req.body.comment;
         c.userProfile = undefined;
         c.userProfile = res.locals.user._id;
-        const comment = new Comment(p);
+        const comment = new Comment(c);
         await comment.save();
         const post = Post.findById(req.body.post_id);
         post.comments.push(comment._id);
