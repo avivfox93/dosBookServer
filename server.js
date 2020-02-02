@@ -13,6 +13,7 @@ const fs = require('fs');
 const profiles = require('./api/profiles');
 const auth = require('./api/auth/authenticate');
 const Picture = require('./entities/Picture');
+const comment = require('./api/comment');
 
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/dosbook.tk/cert.pem', 'utf8');
@@ -67,6 +68,8 @@ app.post('/api/upload',async(req,res)=>{
 app.post('/api/get_posts',auth,post.getPosts);
 
 app.post('/api/post',auth,post.createPost);
+
+app.post('/api/comment',auth,comment.postComment);
 
 app.get('/api/photo/:file(*)',(req,res)=>{
     const fileName = req.params.file;
