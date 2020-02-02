@@ -11,7 +11,7 @@ const postComment = async(req,res)=>{
         c.userProfile = res.locals.user._id;
         const comment = new Comment(c);
         await comment.save();
-        const post = Post.findById(req.body.post_id);
+        const post = await Post.findById(req.body.post_id);
         post.comments.push(comment._id);
         await post.save();
         res.send({id:comment._id});
