@@ -4,10 +4,11 @@ const Comment = require('../entities/Comment');
 
 const createPost = async(req,res)=>{
     try{
-        req.body.post.userProfile = undefined;
-        req.body.post.userProfile = res.locals.user._id;
-        console.log('wallak ' + req.body.post);
-        const post = new Post(req.body.post);
+        let p = req.body.post;
+        p.userProfile = undefined;
+        p.userProfile = res.locals.user._id;
+        console.log('wallak ' + p);
+        const post = new Post(p);
         await post.save();
         res.send({id:post._id});
     }catch(error){
