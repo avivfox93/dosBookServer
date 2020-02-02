@@ -8,6 +8,7 @@ const createPost = async(req,res)=>{
         await post.save();
         res.send({id:post._id});
     }catch(error){
+        console.error(error);
         res.status(401).send({error:error});
     }
 }
