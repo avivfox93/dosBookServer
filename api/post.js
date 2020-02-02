@@ -7,7 +7,7 @@ const createPost = async(req,res)=>{
         let p = req.body.post;
         p.userProfile = undefined;
         p.userProfile = res.locals.user._id;
-        console.log('wallak ' + p);
+        console.log('wallak ' + p.userProfile);
         const post = new Post(p);
         await post.save();
         res.send({id:post._id});
