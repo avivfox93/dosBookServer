@@ -26,7 +26,10 @@ const getPosts = async(req,res)=>{
             .where('date').lte(req.body.date).limit(50).sort({date:-1})
             .populate({path:'userProfile pictures comments',
                         populate:
-                            {path:'safeSearch profilePic userProfile', populate: {path: 'safeSearch profilePic'}}
+                            {path:'safeSearch profilePic userProfile',
+                            populate: {path: 'safeSearch profilePic',
+                            populate: {path: 'safeSearch'}}
+                        }
                         });
         res.send({posts:posts});
         console.log('POSTS: ' + posts);
