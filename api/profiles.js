@@ -26,6 +26,7 @@ const get = async(req,res)=>{
 }
 
 const findProfiles = async(req,res)=>{
+    console.log('WALLAKKKK GOT: ' + req.body);
     const profiles = await User.find({fName: {$regex: req.body.fName,lName:{$regex: req.body.lName}}})
         .select('phone fName lName gender dob friendsId profilePic').populate({
             path: 'profilePic',
