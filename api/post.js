@@ -24,6 +24,7 @@ const getPosts = async(req,res)=>{
             user = res.locals.user;
         else
             user.friendsId = [user._id];
+        console.log('****\n' + user);
         user.friendsId.push(user._id);
         console.log('USER: ' + user);
         const posts = await Post.find().limit(50).where('userProfile').in(user.friendsId)
