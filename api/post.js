@@ -20,7 +20,7 @@ const createPost = async(req,res)=>{
 
 const getPostsFromProfile = async(req,res)=>{
     try{
-        const user = req.body.profile;
+        const user = JSON.parse(req.body.profile);
         const posts = await Post.find().where('userProfile').in(user.friendsId)
             .where('date').lte(req.body.date).limit(50).sort({date:-1})
             .populate({path:'userProfile pictures comments comments.userProfile',
