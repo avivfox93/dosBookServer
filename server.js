@@ -65,6 +65,8 @@ app.post('/api/upload',async(req,res)=>{
     });
 });
 
+app.post('api/get_profile_posts',auth,post.getPostsFromProfile);
+
 app.post('/api/get_posts',auth,post.getPosts);
 
 app.post('/api/post',auth,post.createPost);

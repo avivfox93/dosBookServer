@@ -18,18 +18,9 @@ const createPost = async(req,res)=>{
     }
 }
 
-const getPosts = async(req,res)=>{
+const getPostsFromProfile = async(req,res)=>{
     try{
-        var user = req.body.profile;
-        if(!user){
-            user = res.locals.user;
-            user.friendsId.push(user._id);
-        }
-        else{
-            user.friendsId = [];
-            user.friendsId.push(new ObjectID(user._id));
-        }
-        console.log('****\n' + user);
+        const user = req.body.profile;
         const posts = await Post.find().where('userProfile').in(user.friendsId)
             .where('date').lte(req.body.date).limit(50).sort({date:-1})
             .populate({path:'userProfile pictures comments comments.userProfile',
@@ -46,4 +37,24 @@ const getPosts = async(req,res)=>{
     }
 }
 
-module.exports = {createPost: createPost, getPosts: getPosts};
+const getPosts = async(req,res)=>{
+    try{
+        user = res.locals.user;
+        user.friendsId.push(user._id);
+        const posts = await Post.find().where('userProfile').in(user.friendsId)
+            .where('date').lte(req.body.date).limit(50).sort({date:-1})
+            .populate({path:'userProfile pictures comments comments.userProfile',
+                populate:{path:'safeSearch profilePic userProfile userProfile.safeSearch',
+                populate: {path: 'safeSearch profilePic',
+                populate: {path: 'safeSearch'}}
+            }
+        });
+        res.send({posts:posts});
+        console.log('POSTS: ' + posts);
+    }catch(error){
+        console.error(error);
+        res.status(401).send({error:error});
+    }
+}
+
+module.exports = {createPost: createPost, getPosts: getPosts, getPostsFromProfile: getPostsFromProfile};
