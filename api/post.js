@@ -1,6 +1,7 @@
 
 const Post = require('../entities/Post');
 const Comment = require('../entities/Comment');
+const ObjectID = require('mongodb').ObjectID;
 
 const createPost = async(req,res)=>{
     try{
@@ -25,7 +26,7 @@ const getPosts = async(req,res)=>{
             user.friendsId.push(user._id);
         }
         else
-            user.friendsId = [ObjectId(user._id)];
+            user.friendsId = [new ObjectID(user._id)];
         console.log('****\n' + user);
         const posts = await Post.find().where('userProfile').in(user.friendsId)
             .where('date').lte(req.body.date).limit(50).sort({date:-1})
