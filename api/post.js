@@ -25,7 +25,7 @@ const getPosts = async(req,res)=>{
             user.friendsId.push(user._id);
         }
         else
-            user.friendsId = [user._id];
+            user.friendsId = [ObjectId(user._id)];
         console.log('****\n' + user);
         const posts = await Post.find().where('userProfile').in(user.friendsId)
             .where('date').lte(req.body.date).limit(50).sort({date:-1})
