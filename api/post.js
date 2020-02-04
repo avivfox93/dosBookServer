@@ -26,9 +26,8 @@ const getPosts = async(req,res)=>{
             user.friendsId.push(user._id);
         }
         else{
-            console('ANI POOOOOOOOOO');
             user.friendsId = undefined;
-            user.friendsId = [new ObjectID(user._id)];
+            // user.friendsId = [new ObjectID(user._id)];
         }
         console.log('****\n' + user);
         const posts = await Post.find().where('userProfile').in(user.friendsId)
