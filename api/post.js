@@ -19,7 +19,11 @@ const createPost = async(req,res)=>{
 
 const getPosts = async(req,res)=>{
     try{
-        var user = res.locals.user;
+        var user = req.body.profile;
+        if(!user)
+            user = res.locals.user;
+        else
+            user.friendsId = [user._id];
         user.friendsId.push(user._id);
         console.log('USER: ' + user);
         const posts = await Post.find().limit(50).where('userProfile').in(user.friendsId)
