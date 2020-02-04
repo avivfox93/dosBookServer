@@ -26,6 +26,7 @@ const getPosts = async(req,res)=>{
             user.friendsId.push(user._id);
         }
         else{
+            console('ANI POOOOOOOOOO');
             user.friendsId = undefined;
             user.friendsId = [new ObjectID(user._id)];
         }
