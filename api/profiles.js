@@ -30,7 +30,7 @@ const findProfiles = async(req,res)=>{
     const fName = req.body.fName;
     const lName = req.body.lName.length > 0 ? req.body.lName : "*";
     try{
-        const profiles = await User.find({$and:{fName: {$regex: fName,lName:{$regex: lName}}}})
+        const profiles = await User.find({$and:[{fName: {$regex: fName}},{lName:{$regex: lName}}]})
             .select('phone fName lName gender dob friendsId profilePic').populate({
                 path: 'profilePic',
                 populate: {
