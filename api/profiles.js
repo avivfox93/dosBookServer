@@ -25,4 +25,15 @@ const get = async(req,res)=>{
     res.send({profiles: profiles});
 }
 
-module.exports = {register : register, get : get};
+const findProfiles = async(req,res)=>{
+    const profiles = await User.find({fName: {$regex: req.body.fName,lName:{$regex: req.body.lName}}})
+        .select('phone fName lName gender dob friendsId profilePic').populate({
+            path: 'profilePic',
+            populate: {
+                path: 'safeSearch'
+            }
+        }).exec();
+    res.send({profiles: profiles});
+}
+
+module.exports = {register : register, get : get, findProfiles : findProfiles};

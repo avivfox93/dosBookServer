@@ -8,7 +8,7 @@ const createPost = async(req,res)=>{
         let p = JSON.parse(req.body.post);
         p.userProfile = undefined;
         p.userProfile = res.locals.user._id;
-        console.log('wallak ' + p.userProfile);
+        // console.log('wallak ' + p.userProfile);
         const post = new Post(p);
         await post.save();
         res.send({id:post._id});
@@ -21,7 +21,7 @@ const createPost = async(req,res)=>{
 const getPostsFromProfile = async(req,res)=>{
     try{
         // const user = JSON.parse();
-        console.log('*******\n' + req.body.profile);
+        // console.log('*******\n' + req.body.profile);
         const posts = await Post.find({userProfile: JSON.parse(req.body.profile)._id})
             .where('date').lte(req.body.date).limit(50).sort({date:-1})
             .populate({path:'userProfile pictures comments comments.userProfile',
@@ -31,7 +31,7 @@ const getPostsFromProfile = async(req,res)=>{
             }
         });
         res.send({posts:posts});
-        console.log('POSTS: ' + posts);
+        // console.log('POSTS: ' + posts);
     }catch(error){
         console.error(error);
         res.status(401).send({error:error});
@@ -51,7 +51,7 @@ const getPosts = async(req,res)=>{
             }
         });
         res.send({posts:posts});
-        console.log('POSTS: ' + posts);
+        // console.log('POSTS: ' + posts);
     }catch(error){
         console.error(error);
         res.status(401).send({error:error});
