@@ -22,7 +22,7 @@ const getPostsFromProfile = async(req,res)=>{
     try{
         // const user = JSON.parse();
         console.log('*******\n' + req.body.profile);
-        const posts = await Post.find({userProfile: req.body.profile._id})
+        const posts = await Post.find({userProfile: JSON.parse(req.body.profile)._id})
             .where('date').lte(req.body.date).limit(50).sort({date:-1})
             .populate({path:'userProfile pictures comments comments.userProfile',
                 populate:{path:'safeSearch profilePic userProfile userProfile.safeSearch',
