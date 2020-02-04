@@ -27,7 +27,7 @@ const getPosts = async(req,res)=>{
         else
             user.friendsId = [user._id];
         console.log('****\n' + user);
-        const posts = await Post.find().limit(50).where('userProfile._id').in(user.friendsId)
+        const posts = await Post.find().where('userProfile').in(user.friendsId)
             .where('date').lte(req.body.date).limit(50).sort({date:-1})
             .populate({path:'userProfile pictures comments comments.userProfile',
                 populate:{path:'safeSearch profilePic userProfile userProfile.safeSearch',
