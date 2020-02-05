@@ -68,6 +68,7 @@ const approveRequest = async(req,res)=>{
         const friend = await User.findById(req.body.profile);
         if(!friend)
             throw 'Profile not found!';
+        console.log('remove: ' + user + '\nfrom: ' + friend.friendsId);
         friend.friendsId.pull(user);
         user.friendsId.pull(friend);
         if(!user.friendsId.includes(friend._id))
