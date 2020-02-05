@@ -45,7 +45,7 @@ const findProfiles = async(req,res)=>{
     }
 }
 
-const request = (req,res)=>{
+const request = async(req,res)=>{
     const user = res.locals.user;
     try{
         const friend = await User.findById(req.body.profile);
