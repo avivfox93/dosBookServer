@@ -70,10 +70,10 @@ const approveRequest = async(req,res)=>{
             throw 'Profile not found!';
         friend.outFriendReq.filter(item => item !== user._id);
         user.inFriendReq.filter(item => item !== friend._id);
-        if(!user.friendsId.includes(friend))
-            user.friendsId.push(friend);
-        if(!friend.friendsId.includes(user))
-            friend.friendsId.push(user);
+        if(!user.friendsId.includes(friend._id))
+            user.friendsId.push(friend._id);
+        if(!friend.friendsId.includes(user._id))
+            friend.friendsId.push(user._id);
         await user.save();
         await friend.save();
         res.status(200).send();
