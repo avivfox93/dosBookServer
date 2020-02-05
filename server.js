@@ -40,6 +40,8 @@ app.post('/api/profiles',auth,profiles.register);
 
 app.post('/api/get_profiles',auth,profiles.get);
 
+app.post('/api/request',auth,profiles.request);
+
 app.post('/api/upload',async(req,res)=>{
     const image = req.body.data;
     const safe = await annotate(image);

@@ -38,7 +38,17 @@ const UserSchema = new mongoose.Schema({
     profilePic:{
         type: mongoose.Types.ObjectId, 
         ref: 'Picture'
-    }
+    },
+    inFriendReq: [{
+        type: mongoose.Types.ObjectId,
+        default: [],
+        red: 'User'
+    }],
+    outFriendReq: [{
+        type: mongoose.Types.ObjectId,
+        default: [],
+        red: 'User'
+    }]
 });
 
 UserSchema.methods.generateAuthToken = async function() {

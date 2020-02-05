@@ -45,4 +45,41 @@ const findProfiles = async(req,res)=>{
     }
 }
 
-module.exports = {register : register, get : get, findProfiles : findProfiles};
+const request = (req,res)=>{
+    const user = res.locals.user;
+    try{
+        const friend = await User.findById(req.body.profile);
+        if(!friend)
+            throw 'Profile not found!';
+        user.outFriendReq.push(friend);
+        friend.inFriendReq.push(user);
+        await user.save();
+        await friend.save();
+    }
+    catch(error){
+        console.error(error);
+        res.status(403).send({error:error});
+    }
+}
+
+const approveRequest = (req,res)=>{
+    const user = res.locals.user;
+    try{
+        const friend = await user.find().where(outFriendReq._id).in(user.inFriendReq);
+        if(!friend)
+            throw 'Profile not found!';
+        friend.outFriendReq.filter(item => item !== user._id);
+        user.inFriendReq.filter(item => item !== friend._id);
+        user.friendsId.push(friend);
+        friend.friendsId.push(user);
+        await user.save();
+        await friend.save();
+        res.status(200).send();
+    }catch(error){
+        console.error(error);
+        res.status(403).send({error:error});
+    }
+}
+
+module.exports = {register : register, get : get, findProfiles : findProfiles,
+     request : request, approveRequest : approveRequest};
