@@ -37,10 +37,6 @@ const findProfiles = async(req,res)=>{
                     path: 'safeSearch'
                 }
             }).exec();
-        profiles.map(async doc => {
-            doc.friends = doc.friendsId;
-            await doc.populate('friends').execPopulate();
-        });
         res.send({profiles: profiles});
     }catch(error){
         console.error(error);

@@ -36,7 +36,9 @@ app.post('/api/auth/login',auth,login);
 
 app.post('/api/profiles',auth,profiles.register);
 
-app.get('/api/profiles',auth,profiles.get);
+// app.get('/api/profiles',auth,profiles.get);
+
+app.post('/api/get_profiles',auth,profiles.get);
 
 app.post('/api/upload',async(req,res)=>{
     const image = req.body.data;
