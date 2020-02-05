@@ -22,12 +22,12 @@ const get = async(req,res)=>{
                 path: 'safeSearch'
             }
         }).exec();
-        console.log('WALLAK ' + JSON.stringify(profiles));
+        // console.log('WALLAK ' + JSON.stringify(profiles));
     res.send({profiles: profiles});
 }
 
 const findProfiles = async(req,res)=>{
-    console.log('WALLAKKKK GOT: fName: ' + req.body.fName + ' lName: ' + req.body.lName);
+    // console.log('WALLAKKKK GOT: fName: ' + req.body.fName + ' lName: ' + req.body.lName);
     const fName = req.body.fName;
     const lName = req.body.lName.length > 0 ? req.body.lName : "*";
     try{
