@@ -63,12 +63,12 @@ const request = async(req,res)=>{
 }
 
 const approveRequest = async(req,res)=>{
-    const user = res.locals.user;
     try{
+        const user = res.locals.user;
         const friend = await User.findById(req.body.profile);
         if(!friend)
             throw 'Profile not found!';
-        friend.outFriendReq.filter(item => item !== user._id);
+        friend.outFriendReq.filter(item => item !==user._id);
         user.inFriendReq.filter(item => item !== friend._id);
         if(!user.friendsId.includes(friend._id))
             user.friendsId.push(friend._id);
