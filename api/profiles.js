@@ -62,7 +62,7 @@ const request = (req,res)=>{
     }
 }
 
-const approveRequest = (req,res)=>{
+const approveRequest = async(req,res)=>{
     const user = res.locals.user;
     try{
         const friend = await User.findById(req.body.profile);
