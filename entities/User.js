@@ -42,12 +42,18 @@ const UserSchema = new mongoose.Schema({
     inFriendReq: [{
         type: mongoose.Types.ObjectId,
         default: [],
-        red: 'User'
+        ref: 'User'
     }],
     outFriendReq: [{
         type: mongoose.Types.ObjectId,
         default: [],
-        red: 'User'
+        ref: 'User'
+    }],
+    gendersToShow: [{
+        type: String,
+        enum: ['MALE','FEMALE'],
+        required: true,
+        default: ['MALE','FEMALE']
     }]
 });
 
