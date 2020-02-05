@@ -65,7 +65,7 @@ const request = (req,res)=>{
 const approveRequest = (req,res)=>{
     const user = res.locals.user;
     try{
-        const friend = await user.find().where(outFriendReq._id).in(user.inFriendReq);
+        const friend = await User.findById(req.body.profile);
         if(!friend)
             throw 'Profile not found!';
         friend.outFriendReq.filter(item => item !== user._id);
