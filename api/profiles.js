@@ -15,6 +15,7 @@ const register = (req,res)=>{
 }
 
 const get = async(req,res)=>{
+    console.log('WALLAK ' + JSON.stringify(req.body));
     const profiles = await User.find().where('_id').in(req.body.profiles)
         .select('phone fName lName gender dob friendsId profilePic').populate({
             path: 'profilePic'
