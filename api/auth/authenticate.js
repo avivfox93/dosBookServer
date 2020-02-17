@@ -5,17 +5,22 @@ var admin = require('firebase-admin');
 const auth = async(req,res,next)=>{
     let token = req.body.token
     try{
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if(!decodedToken)
-            throw 'Auth Failed!';
-        try{
+        const user = await User.findOne({uid:req.body.token});
+        if(!user){
+            const decodedToken = await admin.auth().verifyIdToken(token);
+            if(!decodedToken)
+                throw 'Auth Failed!';
+            try{
+                res.locals.uid = decodedToken.uid;
+                res.locals.user = await User.findOne({uid:decodedToken.uid});
+                console.log('FOUND: ' + res.locals.user);
+            }catch(error){
+                console.error(error);
+            }
             res.locals.uid = decodedToken.uid;
-            res.locals.user = await User.findOne({uid:decodedToken.uid});
-            console.log('FOUND: ' + res.locals.user);
-        }catch(error){
-            console.error(error);
+        }else{
+            res.locals.uid = token;
         }
-        res.locals.uid = decodedToken.uid;
         console.log('UID: ' + res.locals.uid);
         return next();
     }catch(err){
