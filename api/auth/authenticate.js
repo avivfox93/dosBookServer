@@ -19,6 +19,7 @@ const auth = async(req,res,next)=>{
             }
             res.locals.uid = decodedToken.uid;
         }else{
+            res.locals.user = user;
             res.locals.uid = token;
         }
         console.log('UID: ' + res.locals.uid);
