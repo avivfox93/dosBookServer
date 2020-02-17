@@ -22,7 +22,6 @@ const auth = async(req,res,next)=>{
             res.locals.user = user;
             res.locals.uid = token;
         }
-        console.log('UID: ' + res.locals.uid);
         return next();
     }catch(err){
         console.error(err + '\n' + 'cannot auth: ' + JSON.stringify(req.body));
