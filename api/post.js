@@ -17,13 +17,13 @@ const createPost = async(req,res)=>{
         res.status(401).send({error:error});
     }
 }
-
+//.and().where('userProfile.gender').in(res.locals.user.gendersToShow)
 const getPostsFromProfile = async(req,res)=>{
     try{
         // const user = JSON.parse();
         console.log('*******\n' + res.locals.user.gendersToShow);
         const posts = await Post.find({userProfile: JSON.parse(req.body.profile)._id})
-            .where('date').lte(req.body.date).and().where('userProfile.gender').in(res.locals.user.gendersToShow)
+            .where('date').lte(req.body.date)
             .limit(50).sort({date:-1})
             .populate({path:'userProfile pictures comments comments.userProfile',
                 populate:{path:'safeSearch profilePic userProfile userProfile.safeSearch',
@@ -44,13 +44,13 @@ const getPosts = async(req,res)=>{
         user = res.locals.user;
         user.friendsId.push(user._id);
         const posts = await Post.find().where('userProfile').in(user.friendsId)
-            .where('date').lte(req.body.date).sort({date:-1})
+            .where('date').lte(req.body.date).sort({date:-1}).limit(50)
             .populate({path:'userProfile pictures comments comments.userProfile',
                 populate:{path:'safeSearch profilePic userProfile userProfile.safeSearch',
                 populate: {path: 'safeSearch profilePic',
                 populate: {path: 'safeSearch'}}
             }
-        }).and().where('userProfile.gender').in(res.locals.user.gendersToShow).limit(50);
+        });
         res.send({posts:posts});
         // console.log('POSTS: ' + posts);
     }catch(error){
