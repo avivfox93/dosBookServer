@@ -21,7 +21,7 @@ const createPost = async(req,res)=>{
 const getPostsFromProfile = async(req,res)=>{
     try{
         // const user = JSON.parse();
-        console.log('*******\n' + req.body.profile);
+        console.log('*******\n' + req.user.gendersToShow);
         const posts = await Post.find({userProfile: JSON.parse(req.body.profile)._id})
             .where('date').lte(req.body.date).and().where('userProfile.gender').in(res.locals.user.gendersToShow)
             .limit(50).sort({date:-1})
