@@ -1,7 +1,7 @@
 
 const User = require('../entities/User');
 
-const showOppositeGenders = (req,res)=>{
+const showOppositeGenders = async (req,res)=>{
     res.locals.user.showOppositeGender = req.body.show;
     await res.locals.user.save();
     res.send(req.body.show);
