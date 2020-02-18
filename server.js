@@ -71,6 +71,8 @@ app.post('/api/upload',async(req,res)=>{
     });
 });
 
+app.post('/api/set_gender_filter',auth,profiles.showOppositeGenders);
+
 app.post('/api/find_profiles',auth,profiles.findProfiles);
 
 app.post('/api/get_profile_posts',auth,post.getPostsFromProfile);

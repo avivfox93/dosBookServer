@@ -1,6 +1,12 @@
 
 const User = require('../entities/User');
 
+const showOppositeGenders = (req,res)=>{
+    res.locals.user.showOppositeGender = req.body.show;
+    await res.locals.user.save();
+    res.send(req.body.show);
+}
+
 const register = (req,res)=>{
     try {
         req.body.profile._id = undefined;
@@ -85,4 +91,4 @@ const approveRequest = async(req,res)=>{
 }
 
 module.exports = {register : register, get : get, findProfiles : findProfiles,
-     request : request, approveRequest : approveRequest};
+     request : request, approveRequest : approveRequest, showOppositeGenders : showOppositeGenders};
