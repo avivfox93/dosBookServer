@@ -83,6 +83,7 @@ app.post('/api/comment',auth,comment.postComment);
 
 app.get('/api/photo/:file(*)',(req,res)=>{
     const fileName = req.params.file;
+    console.log('___PHOTO___ ' + fileName);
     res.sendFile(__dirname  + '/photos/' + fileName);
 });
 
