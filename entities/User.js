@@ -49,12 +49,11 @@ const UserSchema = new mongoose.Schema({
         default: [],
         ref: 'User'
     }],
-    gendersToShow: [{
-        type: String,
-        enum: ['MALE','FEMALE'],
-        required: true,
-        default: ['MALE','FEMALE']
-    }]
+    showOppositeGender: {
+        type: Boolean,
+        default: true,
+        required: true
+    }
 });
 
 UserSchema.methods.generateAuthToken = async function() {
