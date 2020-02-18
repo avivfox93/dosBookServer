@@ -50,7 +50,7 @@ const getPosts = async(req,res)=>{
                 populate: {path: 'safeSearch profilePic',
                 populate: {path: 'safeSearch'}}
             }
-        }).where('userProfile.gender').in(res.locals.user.gendersToShow).limit(50);
+        }).and().where('userProfile.gender').in(res.locals.user.gendersToShow).limit(50);
         res.send({posts:posts});
         // console.log('POSTS: ' + posts);
     }catch(error){
