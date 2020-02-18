@@ -44,14 +44,13 @@ const getPosts = async(req,res)=>{
         user = res.locals.user;
         user.friendsId.push(user._id);
         const posts = await Post.find().where('userProfile').in(user.friendsId)
-            .where('userProfile.gender').in(res.locals.user.gendersToShow).and()
-            .where('date').lte(req.body.date).limit(50).sort({date:-1})
+            .where('date').lte(req.body.date).sort({date:-1})
             .populate({path:'userProfile pictures comments comments.userProfile',
                 populate:{path:'safeSearch profilePic userProfile userProfile.safeSearch',
                 populate: {path: 'safeSearch profilePic',
                 populate: {path: 'safeSearch'}}
             }
-        });
+        }).where('userProfile.gender').in(res.locals.user.gendersToShow).limit(50);
         res.send({posts:posts});
         // console.log('POSTS: ' + posts);
     }catch(error){
