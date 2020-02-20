@@ -10,8 +10,9 @@ const showOppositeGenders = async (req,res)=>{
 const register = (req,res)=>{
     try {
         req.body.profile._id = undefined;
-        console.log('Register ' + req.body.profile.uid);
+        console.log('Register ' + res.locals.uid);
         let user = new User(req.body.profile);
+        user.uid = res.locals.uid;
         user.save();
         res.status(200).send({token: user.token});
     } catch (error) {
