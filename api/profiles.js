@@ -52,13 +52,13 @@ const findProfiles = async(req,res)=>{
 }
 
 const getFriendRequests = async(req,res)=>{
-    await res.locals.user.populate({
+    const user = await User.findById(res.locals.user._id).populate({
         path: 'inFriendReq',
         populate:{
             path: 'profilePic'
         }
     });
-    res.send({req:res.locals.user.inFriendReq});
+    res.send({req:user.inFriendReq});
 }
 
 const request = async(req,res)=>{
