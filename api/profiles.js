@@ -51,6 +51,16 @@ const findProfiles = async(req,res)=>{
     }
 }
 
+const getFriendRequests = async(req,res)=>{
+    await res.locals.user.populate({
+        path: 'inFriendReq',
+        populate:{
+            path: 'profilePic'
+        }
+    });
+    res.send({req:res.locals.user.inFriendReq});
+}
+
 const request = async(req,res)=>{
     const user = res.locals.user;
     try{
@@ -91,4 +101,5 @@ const approveRequest = async(req,res)=>{
 }
 
 module.exports = {register : register, get : get, findProfiles : findProfiles,
-     request : request, approveRequest : approveRequest, showOppositeGenders : showOppositeGenders};
+     request : request, approveRequest : approveRequest, showOppositeGenders : showOppositeGenders,
+     getFriendRequests : getFriendRequests};

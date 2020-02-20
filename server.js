@@ -77,6 +77,8 @@ app.post('/api/find_profiles',auth,profiles.findProfiles);
 
 app.post('/api/get_profile_posts',auth,post.getPostsFromProfile);
 
+app.post('/api/get_friends_req',auth,profiles.getFriendRequests);
+
 app.post('/api/get_posts',auth,post.getPosts);
 
 app.post('/api/post',auth,post.createPost);
