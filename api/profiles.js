@@ -107,7 +107,7 @@ const setProfilePicture = async (req,res)=>{
         console.log('________PIC_____');
         console.log('PIC: ' + req.body.picture);
         console.log('________PIC_____');
-        const pic = await Picture.findById(req.body.picture);
+        const pic = await Picture.findById(req.body.picture._id);
         if(!pic)
             throw 'Picture not found!';
         user.profilePic = pic;
