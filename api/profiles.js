@@ -1,5 +1,6 @@
 
 const User = require('../entities/User');
+const Picture = require('../entities/Picture');
 
 const showOppositeGenders = async (req,res)=>{
     res.locals.user.showOppositeGender = req.body.show;
@@ -100,6 +101,20 @@ const approveRequest = async(req,res)=>{
     }
 }
 
+const setProfilePicture = async (req,res)=>{
+    const user = res.locals.user;
+    try{
+        const pic = await Picture.findById(req.body.picture._id);
+        if(!pic)
+            throw 'Picture not found!';
+        user.profilePic = pic;
+        await user.save();
+        res.send({picture:pic});
+    }catch(error){
+        res.status(403).send({error:error});
+    }
+};
+
 module.exports = {register : register, get : get, findProfiles : findProfiles,
      request : request, approveRequest : approveRequest, showOppositeGenders : showOppositeGenders,
-     getFriendRequests : getFriendRequests};
+     getFriendRequests : getFriendRequests, setProfilePicture : setProfilePicture};
