@@ -106,7 +106,7 @@ const setProfilePicture = async (req,res)=>{
     try{
         const picture = req.body.profile;
         console.log('________PIC_____');
-        console.log('PIC: ' + profile);
+        console.log('PIC: ' + picture);
         console.log('________PIC_____');
         const pic = await Picture.findById(profile._id);
         if(!pic)
