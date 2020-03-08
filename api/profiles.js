@@ -104,6 +104,9 @@ const approveRequest = async(req,res)=>{
 const setProfilePicture = async (req,res)=>{
     const user = res.locals.user;
     try{
+        console.log('________PIC_____');
+        console.log('PIC: ' + req.body.picture);
+        console.log('________PIC_____');
         const pic = await Picture.findById(req.body.picture._id);
         if(!pic)
             throw 'Picture not found!';
