@@ -111,6 +111,7 @@ const setProfilePicture = async (req,res)=>{
         await user.save();
         res.send({picture:pic});
     }catch(error){
+        console.error(error);
         res.status(403).send({error:error});
     }
 };
