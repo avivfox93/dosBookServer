@@ -104,7 +104,7 @@ const approveRequest = async(req,res)=>{
 const setProfilePicture = async (req,res)=>{
     const user = res.locals.user;
     try{
-        const picture = req.body.picture;
+        const picture = JSON.parse(req.body.picture);
         console.log('________PIC_____');
         console.log('PIC: ' + picture);
         console.log('________PIC_____');
