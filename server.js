@@ -81,6 +81,8 @@ app.post('/api/get_friends_req',auth,profiles.getFriendRequests);
 
 app.post('/api/set_profile',auth,profiles.setProfilePicture);
 
+app.post('/api/set_profile_name',auth,profiles.setProfileName);
+
 app.post('/api/get_posts',auth,post.getPosts);
 
 app.post('/api/post',auth,post.createPost);

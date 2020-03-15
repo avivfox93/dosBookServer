@@ -105,9 +105,6 @@ const setProfilePicture = async (req,res)=>{
     const user = res.locals.user;
     try{
         const picture = JSON.parse(req.body.picture);
-        console.log('________PIC_____');
-        console.log('PIC: ' + picture);
-        console.log('________PIC_____');
         const pic = await Picture.findById(picture._id);
         if(!pic)
             throw 'Picture not found!';
@@ -120,6 +117,20 @@ const setProfilePicture = async (req,res)=>{
     }
 };
 
+const setProfileName = async (req,res)=>{
+    const user = res.locals.user;
+    try{
+        user.fName = req.body.fname;
+        user.lName = req.body.lname;
+        await user.save();
+        res.send({msg:'ok'});
+    }catch(error){
+        console.error(error);
+        res.status(403).send({error:error});
+    }
+}
+
 module.exports = {register : register, get : get, findProfiles : findProfiles,
      request : request, approveRequest : approveRequest, showOppositeGenders : showOppositeGenders,
-     getFriendRequests : getFriendRequests, setProfilePicture : setProfilePicture};
+     getFriendRequests : getFriendRequests, setProfilePicture : setProfilePicture,
+     setProfileName : setProfileName};
