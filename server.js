@@ -100,6 +100,12 @@ app.get('/api/ota/:file(*)',(req,res)=>{
     res.sendFile(__dirname  + '/ota/' + fileName);
 });
 
+app.post('/api/ota/:file(*)',(req,res)=>{
+    console.log("got body: " + req.body);
+    const fileName = req.params.file;
+    res.sendFile(__dirname  + '/ota/' + fileName);
+});
+
 admin.initializeApp({
     credential: admin.credential.cert('token.json'),
     databaseURL: "https://dosbook-45989.firebaseio.com"
