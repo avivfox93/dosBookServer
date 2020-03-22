@@ -96,12 +96,13 @@ app.get('/api/photo/:file(*)',(req,res)=>{
 });
 
 app.get('/api/ota/:file(*)',(req,res)=>{
+    console.log('GET');
     const fileName = req.params.file;
     res.sendFile(__dirname  + '/ota/' + fileName);
 });
 
 app.post('/api/ota/:file(*)',(req,res)=>{
-    console.log("got body: " + req.body);
+    console.log('POST got body: ' + req.body);
     const fileName = req.params.file;
     res.sendFile(__dirname  + '/ota/' + fileName);
 });
